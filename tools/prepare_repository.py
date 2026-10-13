@@ -17,7 +17,7 @@ PATTERNS = (
     'assets/app.ico', 'assets/version-info.txt', 'assets/branding/*', 'assets/artwork/*',
     'assets/ocr/manifest.json', 'assets/ocr/NOTICE.txt',
     'assets/ocr/licenses/*', 'assets/argos/manifest.json', 'assets/argos/*.txt',
-    'assets/fonts/*.txt', 'docs/*.md', 'docs/assets/*',
+    'assets/fonts/*.txt', 'docs/*.md', 'docs/assets/*', 'sample/*.png',
 )
 EXCLUDED = {'tools/diagnose_connection.py'}
 SECRET_PATTERNS = (

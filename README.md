@@ -11,7 +11,7 @@
 <img src="https://img.shields.io/badge/version-2.10.0-eeeeea?style=flat-square&labelColor=111111" alt="Version 2.10.0">
 </p>
 
-<p align="center"><a href="https://github.com/siriwiz/rv-translation-studio/releases/tag/v2.10.0">Download for Windows</a> · <a href="#start-translating">Quick start</a> · <a href="#choose-your-engine">Engines</a> · <a href="docs/USER_GUIDE.md">User guide</a> · <a href="docs/BUILD.md">Build from source</a> · <a href="docs/BENCHMARKS.md">Benchmarks</a></p>
+<p align="center"><a href="https://github.com/siriwiz/rv-translation-studio/releases/tag/v2.10.0">Download for Windows</a> · <a href="#translation-samples">Translation samples</a> · <a href="#start-translating">Quick start</a> · <a href="#choose-your-engine">Engines</a> · <a href="docs/USER_GUIDE.md">User guide</a> · <a href="docs/BUILD.md">Build from source</a> · <a href="docs/BENCHMARKS.md">Benchmarks</a></p>
 
 ![RV Translation Studio workspace](docs/assets/studio.png)
 
@@ -55,6 +55,47 @@ Requires **Windows 10/11 x64**. Allow at least 5.2 GB of free space for the down
 | Review and reuse | Original/translated preview, searchable Library, copy, and JSON export |
 | Tune the workflow | Advanced capture, OCR, timeout, cache, blend, appearance, and motion controls |
 | Find the bottleneck | Performance Lab timings for capture, OCR, preparation, translation, and blending |
+
+## Translation samples
+
+Two captured scenes, nine translated overlays. **`default.png` and `default2.png` are the original game captures.** Every screenshot from the `sample` folder is included below, with the source shown first. Click an image to inspect the full-resolution capture.
+
+### Japanese dialogue
+
+**Original · Japanese** — `default.png`
+
+<a href="sample/default.png"><img src="sample/default.png" alt="Original Japanese dialogue before translation" width="100%"></a>
+
+<table>
+<tr>
+<td width="50%"><strong>Thai · Japanese → Thai</strong><br><br><a href="sample/Screenshot (1855).png"><img src="sample/Screenshot (1855).png" alt="Thai translation overlay on the Japanese source scene" width="100%"></a></td>
+<td width="50%"><strong>English · Japanese → English</strong><br><br><a href="sample/Screenshot (1857).png"><img src="sample/Screenshot (1857).png" alt="English translation overlay on the Japanese source scene" width="100%"></a></td>
+</tr>
+<tr>
+<td width="50%"><strong>Korean · Japanese → Korean</strong><br><br><a href="sample/Screenshot (1858).png"><img src="sample/Screenshot (1858).png" alt="Korean translation overlay on the Japanese source scene" width="100%"></a></td>
+<td width="50%"><strong>Russian · Japanese → Russian</strong><br><br><a href="sample/Screenshot (1859).png"><img src="sample/Screenshot (1859).png" alt="Russian translation overlay on the Japanese source scene" width="100%"></a></td>
+</tr>
+</table>
+
+### English dialogue
+
+**Original · English** — `default2.png`
+
+<a href="sample/default2.png"><img src="sample/default2.png" alt="Original English dialogue before translation" width="100%"></a>
+
+<table>
+<tr>
+<td width="50%"><strong>Japanese · English → Japanese</strong><br><br><a href="sample/Screenshot (1862).png"><img src="sample/Screenshot (1862).png" alt="Japanese translation overlay on the English source scene" width="100%"></a></td>
+<td width="50%"><strong>Thai · English → Thai</strong><br><br><a href="sample/Screenshot (1863).png"><img src="sample/Screenshot (1863).png" alt="Thai translation overlay on the English source scene" width="100%"></a></td>
+</tr>
+<tr>
+<td width="50%"><strong>Korean · English → Korean</strong><br><br><a href="sample/Screenshot (1864).png"><img src="sample/Screenshot (1864).png" alt="Korean translation overlay on the English source scene" width="100%"></a></td>
+<td width="50%"><strong>Chinese (Simplified) · English → Chinese</strong><br><br><a href="sample/Screenshot (1865).png"><img src="sample/Screenshot (1865).png" alt="Simplified Chinese translation overlay on the English source scene" width="100%"></a></td>
+</tr>
+<tr>
+<td colspan="2"><strong>Russian · English → Russian</strong><br><br><a href="sample/Screenshot (1866).png"><img src="sample/Screenshot (1866).png" alt="Russian translation overlay on the English source scene" width="100%"></a></td>
+</tr>
+</table>
 
 ## Start translating
 
