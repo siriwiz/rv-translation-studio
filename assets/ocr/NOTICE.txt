@@ -1,0 +1,15 @@
+RV TRANSLATION STUDIO - bundled OCR resources
+
+RapidOCR 3.10.0, RapidAI contributors (Apache License 2.0)
+https://github.com/RapidAI/RapidOCR
+
+PP-OCRv5 ONNX models, PaddlePaddle/PaddleOCR and RapidAI contributors
+(Apache License 2.0). Original model URLs and SHA256 values are recorded
+in manifest.json. Models are distributed unchanged.
+https://github.com/PaddlePaddle/PaddleOCR
+
+ONNX Runtime 1.23.2, Microsoft Corporation (MIT License)
+https://github.com/microsoft/onnxruntime
+
+Full upstream license texts are included in licenses/.
+The application runs OCR on CPU locally. No runtime model downloads occur.

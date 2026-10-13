@@ -1,0 +1,300 @@
+{
+  "argos_version": "1.11.0",
+  "languages": {
+    "en": "English",
+    "th": "Thai",
+    "zh": "Chinese (Simplified)",
+    "ja": "Japanese",
+    "ko": "Korean",
+    "fr": "French",
+    "de": "German",
+    "es": "Spanish",
+    "vi": "Vietnamese",
+    "ru": "Russian"
+  },
+  "models": [
+    {
+      "source": "en",
+      "target": "th",
+      "directory": "models/en_th",
+      "version": "1.9",
+      "package_sha256": "b0fd94eceb04b967b91c2c7d8d1f7b5493c25362e43027a52649242385d0b2a3",
+      "url": "https://data.argosopentech.com/argospm/v1/translate-en_th-1_9.argosmodel",
+      "files": {
+        "models/en_th/metadata.json": "5b9957d0160063c5a91b1631d0305f3865c23885e509d01cd3604599097d505e",
+        "models/en_th/README.md": "9f9cf340fcacd1a4cda095fae282b711aa71203860e67e6bff94e2381fa0dc6d",
+        "models/en_th/sentencepiece.model": "fc618401104178afa0e8d67d469a49f8e71cd3151c51d640a7003a1f71b16b1e",
+        "models/en_th/model/config.json": "b28e3136fc7a103e29585c10c8124849fb01d649531f58e00cbe240111560cd7",
+        "models/en_th/model/model.bin": "5c46a0c60cf4e7d41ca632201b9cb4233f5b17555bdfffa6e82f7adfb3b73991",
+        "models/en_th/model/shared_vocabulary.json": "8a1cf3e29a6442af9ba0df9458490318cccfdc92bd623a1499f1e23a415c4559"
+      }
+    },
+    {
+      "source": "en",
+      "target": "zh",
+      "directory": "models/en_zh",
+      "version": "1.9",
+      "package_sha256": "433e7c4f034d87fbe2353161e05f18646d7999452f801a4e1f0378522b9850ab",
+      "url": "https://data.argosopentech.com/argospm/v1/translate-en_zh-1_9.argosmodel",
+      "files": {
+        "models/en_zh/metadata.json": "106086bc1b77d2d5c298aa38be69e8e87263eeb4167b4614b08a030c43d31b6a",
+        "models/en_zh/README.md": "050e546664f0e70d80b6f83aa1da5f04ee85335f4a1b62d1c89184f76100b5dc",
+        "models/en_zh/sentencepiece.model": "872224b85a11edc9d769a94949fd387b67ea85b50708db9f91f32f5b497a9af3",
+        "models/en_zh/model/config.json": "3a8660f12559a223969532ff191e5e6f50d4ff24164517edbd6a5090dc5144c6",
+        "models/en_zh/model/model.bin": "1a039114d9456b6528fabb65b455b6f156319634a0f984b1f6018f7737d67598",
+        "models/en_zh/model/shared_vocabulary.json": "c0b6e24705ec0489d5b810de365959c1013aecd644cfeca161b54ea1df6a7dc0"
+      }
+    },
+    {
+      "source": "en",
+      "target": "ja",
+      "directory": "models/en_ja",
+      "version": "1.1",
+      "package_sha256": "16300cc4eaa85320520cabcf433b63d01be40ef6966251de72043a083408f716",
+      "url": "https://data.argosopentech.com/argospm/v1/translate-en_ja-1_1.argosmodel",
+      "files": {
+        "models/en_ja/metadata.json": "e5c8659c625f6853a7a17c0f6d3312871871cc767d30895ba271fc691f3ddc30",
+        "models/en_ja/README.md": "7c90a273d8866a3039d083d1cb6968497273c8fa6a33d94f7525bc560d268187",
+        "models/en_ja/sentencepiece.model": "33de6356768ef5eaca1a41883b1990273093ffbe70720083502cb1a975b59b3d",
+        "models/en_ja/model/model.bin": "52a021f9d552beee5c15ec8f05e2bf72c90402ef428d58f7d625643ba2dc1780",
+        "models/en_ja/model/shared_vocabulary.txt": "6c71aa783245ef5f6bd36b192c1d8896434a232797e90fc797058440377e9771"
+      }
+    },
+    {
+      "source": "en",
+      "target": "ko",
+      "directory": "models/en_ko",
+      "version": "1.1",
+      "package_sha256": "e03d8e65e6d44525ec5808c3409fcf8728c76c2c76925372b6d3dc3278de17fc",
+      "url": "https://data.argosopentech.com/argospm/v1/translate-en_ko-1_1.argosmodel",
+      "files": {
+        "models/en_ko/metadata.json": "d62149092f03a99e5f4ac21bcdedece27f7c25ef14c3841dce06df898c0ce60e",
+        "models/en_ko/README.md": "53cbfcaac1cda06fb5b5dc291a0493a8c2a03f74f2f479dc238f898362f8c6e3",
+        "models/en_ko/sentencepiece.model": "1e732c7195cf4d192bec9abf8f7f91d086edbd8f48aca8be3b1cdcffa530ad8b",
+        "models/en_ko/model/model.bin": "3ad29824a57f3842b165c87513bc8723deb1486f91dbb154137be6dc2fa0a777",
+        "models/en_ko/model/shared_vocabulary.txt": "ba4229260f55ffdafa706e26aae6b2e956ff2eefcb9f25ca4ff613c63f2b1102"
+      }
+    },
+    {
+      "source": "en",
+      "target": "fr",
+      "directory": "models/en_fr",
+      "version": "1.9",
+      "package_sha256": "3a65ed83364f4e7b06e30f9dd823db1934899ed3ce839e63f46dc7b09dc797b4",
+      "url": "https://data.argosopentech.com/argospm/v1/translate-en_fr-1_9.argosmodel",
+      "files": {
+        "models/en_fr/metadata.json": "6faa7ac3fc7f8ba6de3a7e798bc3ae5e7286081daf8008632221a542df80796b",
+        "models/en_fr/README.md": "c89aed74175841b0842c03c08282d19b6088d8ec69b7c285b167a01140f0744a",
+        "models/en_fr/sentencepiece.model": "173e9f493a668fe396d599e28d414a201193094e6ffd7a4678e5aab0f6d3d838",
+        "models/en_fr/model/config.json": "b28e3136fc7a103e29585c10c8124849fb01d649531f58e00cbe240111560cd7",
+        "models/en_fr/model/model.bin": "870d2b37c7059c3e5df9cf3aeb8af4afe1840f208af776567f9f98ebb605c1c3",
+        "models/en_fr/model/shared_vocabulary.json": "528a527b3504bda364600f8bd7a2db1b0d7f82ef97a33ba0e80c289c4ae63c24"
+      }
+    },
+    {
+      "source": "en",
+      "target": "de",
+      "directory": "models/en_de",
+      "version": "1.3",
+      "package_sha256": "6cd847f0c06c9c66013e6b0932e07fd54a6d90894659c02bf6c5247b72fb25b1",
+      "url": "https://data.argosopentech.com/argospm/v1/translate-en_de-1_3.argosmodel",
+      "files": {
+        "models/en_de/metadata.json": "81bee3a6a246a8ba9e7152145a8bb1138a57b8d65faa6b7b1601ada504cbe156",
+        "models/en_de/README.md": "7b67b6985b4251717ffef4683159e6930ccfebff696f4fe71fa22012e1576a12",
+        "models/en_de/sentencepiece.model": "4938b124d8e488744fd4c58e6f7b665294739f4c6aca15a078689a1afb58ed4e",
+        "models/en_de/model/config.json": "93f2c28a9b8720a6fbe874e1a7c43ab9530042b42a96804330b46b861a0ece86",
+        "models/en_de/model/model.bin": "c29ca0fe955386c79197d0fce05b9cec0fa68953e41254a27ca654ee0dfb175a",
+        "models/en_de/model/shared_vocabulary.json": "05f4151e7239323d23b5f327e68872baade2f3e7e7af1780bf3a44c7a77b408b"
+      }
+    },
+    {
+      "source": "en",
+      "target": "es",
+      "directory": "models/en_es",
+      "version": "1.0",
+      "package_sha256": "d698d0ef87ad70d5d184b7fa6965905bf4368f09a2bb9ffb165a79bac96af0c4",
+      "url": "https://data.argosopentech.com/argospm/v1/translate-en_es-1_0.argosmodel",
+      "files": {
+        "models/en_es/metadata.json": "d3360ebfd9b5458b84d7c75d078e379541e4f2ce009bca84f20f360572547bbd",
+        "models/en_es/README.md": "cd8423493ed8817466822957d8c95070b5b4cc87eb122f06d60e7e31f138a3cf",
+        "models/en_es/sentencepiece.model": "71790fd75854ce996bc9f7da40fb72af41b74296d53fee64bce141967e8e81b1",
+        "models/en_es/model/model.bin": "d5771f823c9dd7eedcf9367c116aede65613a194f761a81826351e2bccb194c4",
+        "models/en_es/model/shared_vocabulary.txt": "e03caf337f37b61d2e056b9cfbc5551a0c8ae7555541fba14c067d4574db1132"
+      }
+    },
+    {
+      "source": "en",
+      "target": "vi",
+      "directory": "models/en_vi",
+      "version": "1.9",
+      "package_sha256": "86957101aa4099aa9a1a7492e41987d938d3cf0fdaf4fb684c0797a9d567dd16",
+      "url": "https://data.argosopentech.com/argospm/v1/translate-en_vi-1_9.argosmodel",
+      "files": {
+        "models/en_vi/metadata.json": "4e30b185a4eb8b4cebb706f08bfd8999ae93a0ba232cdcc23d01a4f535acd140",
+        "models/en_vi/README.md": "d8edb49d2a6f031a7c31eb94fe2e745c60ab573d76243bbc2ff759fda5a7dc02",
+        "models/en_vi/sentencepiece.model": "fdd9ab486ca8ea060967105e30db7d8928729c78a67448711d2dd7c3153b37cd",
+        "models/en_vi/model/config.json": "970e93165032234327dedcfe8b3b3b2dbd270fa74691d1c452613f0da1dc4a10",
+        "models/en_vi/model/model.bin": "32e13c96db538f77fc7773596de75b1b4ca5e3f933a26c2cf67311f4c16ff9c8",
+        "models/en_vi/model/shared_vocabulary.json": "33b19841fdf4e381982c610258ca698072d7593435b86bd9051813e039d63fe8"
+      }
+    },
+    {
+      "source": "en",
+      "target": "ru",
+      "directory": "models/en_ru",
+      "version": "1.9",
+      "package_sha256": "591d743ae103752b88ffc38785c50421320f4eff93c8967e0d3d2e14d4e27811",
+      "url": "https://data.argosopentech.com/argospm/v1/translate-en_ru-1_9.argosmodel",
+      "files": {
+        "models/en_ru/metadata.json": "a40657925da1c25d98d8a6bc53c436a5b1179bd8771e016147d88587edf1b529",
+        "models/en_ru/README.md": "ae9d1fa7d28837433eb979e5e442c3907fa84d10458ff9f3d23eb372bf0061cd",
+        "models/en_ru/sentencepiece.model": "cdd7fd3f6b069cd1baa90d95682ec6851119ae0d734438ba85d3678b2f1e2a66",
+        "models/en_ru/model/config.json": "3f1a3cc20b961c1fe0e6007e8ca663730c4a8b82fa54073fde03edf1402c6726",
+        "models/en_ru/model/model.bin": "c262cce6a506447d4b3c7a899787694df13783340ba67f0df3ecbf046ae27924",
+        "models/en_ru/model/shared_vocabulary.json": "5e39116c77f19b90841f9b0d0dbe4e38ecf6eadd43dff40ea1415104f441c720"
+      }
+    },
+    {
+      "source": "th",
+      "target": "en",
+      "directory": "models/th_en",
+      "version": "1.9",
+      "package_sha256": "b6642c07389b156f568aa08c64140243bc1b1926f82df2559a2eae08316f84ce",
+      "url": "https://data.argosopentech.com/argospm/v1/translate-th_en-1_9.argosmodel",
+      "files": {
+        "models/th_en/metadata.json": "0d986123bd8330293096cf7c2c4156a5b9c5896d5e24347ebf4a387ad802498b",
+        "models/th_en/README.md": "c3cfcb1d04ddb5fdcfa97569c93bb7d6b88446f283d28ba4db93c1b39a838d14",
+        "models/th_en/sentencepiece.model": "493675a00bb77f552782da057587a4dc3bf96b300637d363bae9c32c9d36a38d",
+        "models/th_en/model/config.json": "b28e3136fc7a103e29585c10c8124849fb01d649531f58e00cbe240111560cd7",
+        "models/th_en/model/model.bin": "38a6a63c75a9cdbc7ce4791a349ab8353df13a9942cb3c6f6409adfbdf1d5d69",
+        "models/th_en/model/shared_vocabulary.json": "518acb062335a1adf199bfb46d17f07dc707ba6a7afd9fd9e8ef1e6597144861"
+      }
+    },
+    {
+      "source": "zh",
+      "target": "en",
+      "directory": "models/zh_en",
+      "version": "1.9",
+      "package_sha256": "62e7af5a3a48b530e47b7b3e5c78c2de79073ecd815750d2bf3ab35b4a67da2d",
+      "url": "https://data.argosopentech.com/argospm/v1/translate-zh_en-1_9.argosmodel",
+      "files": {
+        "models/zh_en/metadata.json": "e42259bbbec6cd09ecd16d97d614bebbf1e7351130c6970fe77a2f1ed7f99cca",
+        "models/zh_en/README.md": "1bb7a1261520b8f7d1f94b7fd108c0ccfd7333a3e40a2256df274df0a2ff1cc8",
+        "models/zh_en/sentencepiece.model": "72600ea476b3e3b76763919c3a30ef5104d9b473b19567d45251f56034264f54",
+        "models/zh_en/model/config.json": "b28e3136fc7a103e29585c10c8124849fb01d649531f58e00cbe240111560cd7",
+        "models/zh_en/model/model.bin": "edd8c8a6863d36959613ff291074627a1635fab2f51b872ef437e924d238921a",
+        "models/zh_en/model/shared_vocabulary.json": "c980413009e8041fc42c81730ad4b72ab6cb1313b3b89b1ced261fe5e177b024"
+      }
+    },
+    {
+      "source": "ja",
+      "target": "en",
+      "directory": "models/ja_en",
+      "version": "1.1",
+      "package_sha256": "623e3477959a815eb0a5ef53e09079ae8f1f9d3bbcd230473baf28c03fb83335",
+      "url": "https://data.argosopentech.com/argospm/v1/translate-ja_en-1_1.argosmodel",
+      "files": {
+        "models/ja_en/metadata.json": "a1becb19cb8abfc25d15bd8978cf543215c596876fb4b6d5c2c2a50949ece416",
+        "models/ja_en/README.md": "7c90a273d8866a3039d083d1cb6968497273c8fa6a33d94f7525bc560d268187",
+        "models/ja_en/sentencepiece.model": "af3f880c259f55c62ed6c77c1ebc3cf46d6a95cc7cd8e9fcc78ee75417b987ef",
+        "models/ja_en/model/model.bin": "5d2ac0b0e427aa368b635812853a70b09976d2318bf889a9327488968b501c83",
+        "models/ja_en/model/shared_vocabulary.txt": "8e6872bdfa55e2d91334ec5cd24eb6dab86033129639b940c60cd955b0f7a8a7"
+      }
+    },
+    {
+      "source": "ko",
+      "target": "en",
+      "directory": "models/ko_en",
+      "version": "1.1",
+      "package_sha256": "6da8f3db6ca40f42b1875570a1c06856f6e17c7ef62845d85de217ba548c1471",
+      "url": "https://data.argosopentech.com/argospm/v1/translate-ko_en-1_1.argosmodel",
+      "files": {
+        "models/ko_en/metadata.json": "be98a5192f6e985982d0c11a08b861ad2448efa82443e06e539b4e1d9320142b",
+        "models/ko_en/README.md": "e4b3c19dbbbe7d561fed57d4a46641783321b6649aa7674b689e5265f68999f1",
+        "models/ko_en/sentencepiece.model": "98506598307754afd153041193f46cf8b07c5dadbd5ffbebf67ef1c45ffbe74b",
+        "models/ko_en/model/model.bin": "30170587ac837b737a749d4f821feb0925937cc9cbbedcf6aed07b9cf974f6ad",
+        "models/ko_en/model/shared_vocabulary.txt": "05967edbd8dd99ab2710dd102d0d17902ccdb23b1ba333884618052fd6075bfe"
+      }
+    },
+    {
+      "source": "fr",
+      "target": "en",
+      "directory": "models/fr_en",
+      "version": "1.9",
+      "package_sha256": "3b3052fee6bb1e8e8e632a26a723eb2a2c7710dfe73ba61ffd9b83e85d4f14c1",
+      "url": "https://data.argosopentech.com/argospm/v1/translate-fr_en-1_9.argosmodel",
+      "files": {
+        "models/fr_en/metadata.json": "b10f3c55823794941855b002d8056db85cb5ae19e58ceb3349f2f27461255188",
+        "models/fr_en/README.md": "e7ed6e341cd044ed20e6c65fceedf055364178146171d092a156fc3a90121046",
+        "models/fr_en/sentencepiece.model": "78d0e717c77053f1c4b856d8661d9cb87c64f083a35418c087b9146300e4f585",
+        "models/fr_en/model/config.json": "b28e3136fc7a103e29585c10c8124849fb01d649531f58e00cbe240111560cd7",
+        "models/fr_en/model/model.bin": "12f4dd41956b8975067b710675ce0668073b4d682892a9b1c496287cecbd0802",
+        "models/fr_en/model/shared_vocabulary.json": "528a527b3504bda364600f8bd7a2db1b0d7f82ef97a33ba0e80c289c4ae63c24"
+      }
+    },
+    {
+      "source": "de",
+      "target": "en",
+      "directory": "models/de_en",
+      "version": "1.3",
+      "package_sha256": "becc2b0011f8249fcb89be9ecb75ba0d876b1fab93c28ee6ff0420936897d637",
+      "url": "https://data.argosopentech.com/argospm/v1/translate-de_en-1_3.argosmodel",
+      "files": {
+        "models/de_en/metadata.json": "3894fcd5fb92120a3238d101824c5cbcc366a42a6c56a587c41ab3281aea6e83",
+        "models/de_en/README.md": "b16cbffa51cab63c8583cdb8ff385e8c12ddb92e80d1534f83058e5b6adfbeb9",
+        "models/de_en/sentencepiece.model": "f46578fd7ce855911e1746b1f900900572fecb1c2f55355c091171249804492d",
+        "models/de_en/model/config.json": "2a0f8459304832ff6a611f93cde29a58d64f8b7250d4cc916a67c06b535f6ab8",
+        "models/de_en/model/model.bin": "8035a90049ecfb74c61ee8c84189a848b39f91023084e9eeadfd51d01b978c3f",
+        "models/de_en/model/shared_vocabulary.json": "41e881d1ac9afab5ccb383d87eb7423808423de35a41cab227a57685f72d3c02"
+      }
+    },
+    {
+      "source": "es",
+      "target": "en",
+      "directory": "models/es_en",
+      "version": "1.9",
+      "package_sha256": "c54df2b62fceaf54a3ce5d97db6bf56efd7940063329f6778f4212d2acb370d4",
+      "url": "https://data.argosopentech.com/argospm/v1/translate-es_en-1_9.argosmodel",
+      "files": {
+        "models/es_en/bpe.model": "567708133d5a722ac57c1431f9490904d9bcacd85134778e34ca2f901855855e",
+        "models/es_en/metadata.json": "976bb0aafb1142b7f2936ed2becad224b47aef619685fb8b17faab81080cc725",
+        "models/es_en/README.md": "ca784d58b3fe81e557774db5ae33c4278bd6cfe64a43a6aa7301cce062b201c6",
+        "models/es_en/model/config.json": "152eb448f1020eb55f90971d7b95f61896abee8415d555ca51ae7897ac0a0e68",
+        "models/es_en/model/model.bin": "3c634f2fbfce11ba9c3db839db50079c08d3cdb12c74f2c21671f742dbbb30f1",
+        "models/es_en/model/shared_vocabulary.json": "8ba15845314c1291fad86b0bf52b4a8a5db2a2f01b898c8c44d9e21e896a041f"
+      }
+    },
+    {
+      "source": "vi",
+      "target": "en",
+      "directory": "models/vi_en",
+      "version": "1.9",
+      "package_sha256": "ebd51b7189b13eccb9238a5777de1d343008c4c05284a8b89610242364433953",
+      "url": "https://data.argosopentech.com/argospm/v1/translate-vi_en-1_9.argosmodel",
+      "files": {
+        "models/vi_en/metadata.json": "86a43159d666780e40adc6c2dc084e301c5048928e0cd1827adfd23190ba6e53",
+        "models/vi_en/README.md": "38be70004a54fc46b699ac7ac2b4802c579709c6478482f3c471b0d9a127b1fe",
+        "models/vi_en/sentencepiece.model": "9deb4f9e7bebd3876f4bf238a9eb52f2f95a1fba2210a4a8239167c55c15e67d",
+        "models/vi_en/model/config.json": "b28e3136fc7a103e29585c10c8124849fb01d649531f58e00cbe240111560cd7",
+        "models/vi_en/model/model.bin": "63aa5bdb275126e62d27ca43ed8c9021df0ae6b94383ca8be4d99c6d73fbcb96",
+        "models/vi_en/model/shared_vocabulary.json": "f1672426c4370b58e61646492e261d6477d2cbae10d21c23fe7d7ce95fa97610"
+      }
+    },
+    {
+      "source": "ru",
+      "target": "en",
+      "directory": "models/ru_en",
+      "version": "1.9",
+      "package_sha256": "e9ba8bf722d10a4a4c39f74289d5938fd47eac08dbe4ed0afd22d89445a5c3ac",
+      "url": "https://data.argosopentech.com/argospm/v1/translate-ru_en-1_9.argosmodel",
+      "files": {
+        "models/ru_en/metadata.json": "2034d666010673068722bc15af5bb8561173665872867c89a1b99695f0fb25d0",
+        "models/ru_en/README.md": "5a157fd062b9786eb4c7d5aa8fce0f3f01de0fa71c2f34fbf16e222c66ecd090",
+        "models/ru_en/sentencepiece.model": "d324f59d3b5ba04d9b088e162b5e779e27a5eb72d56ec8e5e69a9efc1bf8f495",
+        "models/ru_en/model/config.json": "3f1a3cc20b961c1fe0e6007e8ca663730c4a8b82fa54073fde03edf1402c6726",
+        "models/ru_en/model/model.bin": "026d5f34266b4235c13fc29c665f151b88d0c1b02b0be7f87734fe9c511e20bc",
+        "models/ru_en/model/shared_vocabulary.json": "32d134b048b6a27a48ba7fad9154976743b9bed9cbef7080b952108374d1cea1"
+      }
+    }
+  ]
+}
