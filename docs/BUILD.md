@@ -55,6 +55,18 @@ The script rebuilds the local UI, verifies model/runtime manifests, and invokes 
 
 The single-file executable extracts its payload before starting. Bundling many offline models increases file size and cold-launch time. A built artifact must be smoke-tested separately before distribution; a local verified build is separate from publishing a downloadable GitHub Release.
 
+## Prepare GitHub Release assets
+
+GitHub limits each release asset to less than 2 GiB. The all-model 2.10.0 executable is larger, so the release uses exact binary parts and a Windows assembly helper. After verifying the executable, choose a fresh output directory:
+
+```powershell
+python tools/prepare_release.py --input dist/RVTranslationStudio-2.10.0.exe --version 2.10.0 --output artifacts/release-2.10.0/github-assets
+```
+
+The tool creates 1,800 MiB parts, `Assemble-RVTranslationStudio-2.10.0.cmd`, `READ-ME-FIRST.txt`, `SHA256SUMS.txt`, and a local `release-manifest.json`. Upload the parts, helper, readme, and checksum list as release assets. Keep the manifest as local verification evidence.
+
+Before publishing, run the generated helper with `/quiet`, check its exit code, and compare the assembled executable's SHA-256 with the verified build. The helper uses Windows PowerShell's built-in .NET hashing support, keeps the downloads, and refuses to replace an existing executable whose hash differs. Verify GitHub's reported asset sizes and SHA-256 digests against the manifest after upload. The packaging tool prepares files; it does not publish a release or handle credentials.
+
 ## Repository layout
 
 ```text

@@ -11,7 +11,7 @@
 <img src="https://img.shields.io/badge/version-2.10.0-eeeeea?style=flat-square&labelColor=111111" alt="Version 2.10.0">
 </p>
 
-<p align="center"><a href="#start-translating">Quick start</a> · <a href="#choose-your-engine">Engines</a> · <a href="docs/USER_GUIDE.md">User guide</a> · <a href="docs/BUILD.md">Build from source</a> · <a href="docs/BENCHMARKS.md">Benchmarks</a></p>
+<p align="center"><a href="https://github.com/siriwiz/rv-translation-studio/releases/tag/v2.10.0">Download for Windows</a> · <a href="#start-translating">Quick start</a> · <a href="#choose-your-engine">Engines</a> · <a href="docs/USER_GUIDE.md">User guide</a> · <a href="docs/BUILD.md">Build from source</a> · <a href="docs/BENCHMARKS.md">Benchmarks</a></p>
 
 ![RV Translation Studio workspace](docs/assets/studio.png)
 
@@ -23,7 +23,23 @@ RV Translation Studio captures dialogue, reads it locally, translates it, and pa
 
 Choose a fully local setup with RapidOCR and Argos, or connect a supported cloud provider when you want a different translation model. The monochrome workspace brings capture, comparison, history, connection, and advanced settings into one desktop app.
 
-> **Project status:** the current version is **2.10.0**, with generated RV branding, a new monochrome preview illustration, and two translation providers: ChatGPT and Argos Local. The measured benchmark uses the **2.9.2 baseline**. No downloadable `.exe` release has been published here yet. Large model files are prepared separately when building from source.
+> **Project status:** the current version is **2.10.0**, with generated RV branding, a new monochrome preview illustration, and two translation providers: ChatGPT and Argos Local. The [Windows release](https://github.com/siriwiz/rv-translation-studio/releases/tag/v2.10.0) includes all ten offline languages. The measured benchmark uses the **2.9.2 baseline**.
+
+## Download for Windows
+
+Open **[Release 2.10.0](https://github.com/siriwiz/rv-translation-studio/releases/tag/v2.10.0)** and download these three assets into the same folder:
+
+| File | Purpose |
+| --- | --- |
+| `RVTranslationStudio-2.10.0.exe.part1` | First executable part, 1.89 GB |
+| `RVTranslationStudio-2.10.0.exe.part2` | Second executable part, 665 MB |
+| `Assemble-RVTranslationStudio-2.10.0.cmd` | Joins the parts and verifies SHA-256 |
+
+Double-click the `.cmd` helper, wait for **SHA-256 verified**, then open the resulting **`RVTranslationStudio-2.10.0.exe`**. No Python, Node.js, or archive utility is required. The helper keeps the downloaded parts and preserves an existing executable with a different hash.
+
+The complete executable is 2,552,576,599 bytes, above [GitHub's 2 GiB limit per release asset](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases). Both parts reconstruct the exact verified build with its offline models. Individual `.part` files cannot run. `READ-ME-FIRST.txt` and `SHA256SUMS.txt` are also available in the release; GitHub's **Source code** archives contain development files rather than the executable.
+
+Requires **Windows 10/11 x64**. Allow at least 5.2 GB of free space for the downloads and assembled executable, plus room for first-launch extraction. This build is unsigned. Your GitHub account needs access to this private repository to download its assets.
 
 ## What you can do
 
