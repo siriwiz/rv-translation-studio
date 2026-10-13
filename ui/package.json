@@ -1,0 +1,7 @@
+{
+  "name": "rv-translation-studio-ui",
+  "version": "2.9.3",
+  "private": true,
+  "scripts": {"build": "tailwindcss -i ./src/styles.css -o ./dist/styles.css --minify", "check": "node --check src/app.js && node --check src/controls.js"},
+  "devDependencies": {"@tailwindcss/cli": "^4.1.0", "tailwindcss": "^4.1.0", "daisyui": "^5.0.0"}
+}
