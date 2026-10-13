@@ -1,0 +1,54 @@
+# Credentials and private application state
+.env
+.env.*
+!.env.example
+accounts.dat
+gemini*.dat
+history.json
+settings.json
+host.json
+translate_cache.json
+*.pem
+*.key
+# Dependencies and generated output
+.build-tools/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+ui/dist/
+**/node_modules/
+*.spec
+*.log
+requirements-build.tmp.txt
+# Test captures and temporary artifacts
+.test-data*/
+artifacts/
+tmp*/
+.pytest_cache/
+# Payloads prepared from pinned manifests
+assets/ocr/*.onnx
+assets/ocr/*.download
+assets/argos/models/
+assets/gemini/runtime/
+tools/argos/*.argosmodel
+tools/argos/*.download
+tools/antigravity/
+# Legacy local experiments; current implementation lives in desktop/
+bbu/
+bug/
+fii/
+core/
+utils/
+bu.txt
+config.py
+engine.py
+main.legacy.py
+main - Copy.py
+main - final.py
+iannnnn-DUCK-*.ttf
+Martinthapad.ttf
+PlaypenSansThai-Bold.ttf
