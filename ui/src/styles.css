@@ -27,7 +27,7 @@ svg { flex: none; }
 .app { height: 100dvh; display: grid; grid-template-columns: 210px minmax(0,1fr); }
 .sidebar { background: #090909; border-right: 1px solid #292929; padding: 28px 18px 18px; display: flex; flex-direction: column; }
 .brand { display: flex; align-items: center; gap: 12px; padding: 0 8px 30px; }
-.brand-mark { display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid #74746f; border-radius: 11px; font-size: 21px; font-weight: 650; letter-spacing: -2px; }
+.brand-mark { display: grid; place-items: center; width: 44px; height: 44px; border: 0; border-radius: 11px; object-fit: contain; flex: none; }
 .brand-name { font-size: 10px; font-weight: 650; line-height: 1.5; letter-spacing: 1.5px; }
 .eyebrow { font: 10px/1.5 Consolas,monospace; letter-spacing: 1.7px; text-transform: uppercase; color: #91918b; }
 .nav-label { margin: 18px 12px 9px; }
@@ -88,7 +88,7 @@ svg { flex: none; }
 .tab { height: 25px; font-size: 10px; padding: 0 11px; border-radius: 3px; color: #96968d; }
 .tab-active { background: #dfdfd7; color: #151515; }
 .scene { aspect-ratio: 1.98; min-height: 200px; max-height: 365px; position: relative; background: #101010; overflow: hidden; }
-.scene-art { width: 100%; height: 100%; position: absolute; inset: 0; }
+.scene-art { width: 100%; height: 100%; position: absolute; inset: 0; object-fit: cover; object-position: center 48%; }
 .scene:after { content: ''; position: absolute; inset: 0; background: linear-gradient(transparent 65%,#000b); pointer-events: none; }
 .scene-img { width: 100%; height: 100%; object-fit: contain; position: absolute; inset: 0; z-index: 2; }
 .scene.has-capture .scene-art { display: none; }

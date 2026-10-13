@@ -6,6 +6,19 @@ from desktop.translation import Translator
 class CacheTests(unittest.TestCase):
     @patch('desktop.translation.write_json')
     @patch('desktop.translation.read_json',return_value={})
+    @patch('desktop.translation.stream_translation',return_value=['cloud translation'])
+    def test_cloud_and_local_results_never_share_cache_entries(self,stream,read,write):
+        translator=Translator()
+        local=Mock(return_value=['local translation'])
+        self.assertEqual(translator.translate(['Hello'],'token','same-model'),(['cloud translation'],0))
+        self.assertEqual(translator.translate(['Hello'],None,'same-model',provider='argos',complete=local),(['local translation'],0))
+        self.assertEqual(translator.translate(['Hello'],None,'same-model',provider='argos',complete=local),(['local translation'],1))
+        self.assertEqual(translator.translate(['Hello'],'token','same-model'),(['cloud translation'],1))
+        stream.assert_called_once()
+        local.assert_called_once()
+
+    @patch('desktop.translation.write_json')
+    @patch('desktop.translation.read_json',return_value={})
     @patch('desktop.translation.stream_translation',return_value=['translated'])
     def test_repeat_capture_skips_network_and_auth(self,stream,read,write):
         translator=Translator()

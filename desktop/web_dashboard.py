@@ -135,7 +135,7 @@ class StudioBridge(QObject):
                 callbacks={'clear_overlay':w.clear_overlay,'copy_latest':w.copy_latest_translation,'copy_sample':w.copy_sample,
                            'clear_sample':w.clear_sample,'export_history':w.export_history,'clear_history':w.clear_history,
                            'undo_history':w.undo_clear_history,'login':w.login,'add_account':lambda:w.login(new=True),
-                           'cancel_login':w.auth.cancel.set,'reload_models':w.load_models,'manage_usage':w.manage_usage,'create_gemini_key':w.create_gemini_key,
+                           'cancel_login':w.auth.cancel.set,'reload_models':w.load_models,'manage_usage':w.manage_usage,
                            'logout':w.logout,'pick_region':w.pick_region,'reload_languages':w.reload_ocr_languages,
                            'language_packs':w.open_language_settings,'fast_preset':w.fast_preset,'clear_cache':w.clear_translation_cache,
                            'reset_advanced':w.reset_advanced,'reset_scale':lambda:w.font_slider.setValue(20)}
@@ -154,12 +154,6 @@ class StudioBridge(QObject):
             if not isinstance(value,bool): raise ValueError('Expected a switch value')
             toggles[key].setChecked(value)
         elif key=='provider':w.switch_provider(str(value))
-        elif key=='gemini_auth_mode':w.switch_gemini_mode(str(value))
-        elif key=='gemini_project':
-            import re
-            project=str(value).strip()
-            if project and not re.fullmatch(r'[a-z][a-z0-9-]{4,62}',project):raise ValueError('Enter a Google Cloud project ID.')
-            w.settings[key]=project;w.gemini_auth.cli.stop();w.save_settings()
         elif key=='font_size': w.font_slider.setValue(int(value))
         elif key in ('screen','mode','account'):
             control={'screen':w.screen,'mode':w.mode,'account':w.accounts}[key]

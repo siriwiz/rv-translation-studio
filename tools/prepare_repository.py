@@ -6,7 +6,7 @@ import shutil
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-STAGE = ROOT / 'artifacts/publishing/repository'
+STAGE = ROOT / 'artifacts/release-2.10.0/repository'
 PATTERNS = (
     'main.py', 'build.ps1', 'requirements-desktop.txt', 'README.md', 'CHANGELOG.md',
     'THIRD_PARTY_NOTICES.md', '.gitignore', '.gitattributes',
@@ -14,10 +14,9 @@ PATTERNS = (
     'desktop/*.py', 'desktop/ocr.ps1', 'tests/*.py',
     'ui/src/*', 'ui/package.json', 'ui/package-lock.json',
     'tools/*.py', 'tools/hooks/*.py', 'tools/argos/downloads.json',
-    'tools/gemini/package.json', 'tools/gemini/package-lock.json',
-    'assets/app.ico', 'assets/ocr/manifest.json', 'assets/ocr/NOTICE.txt',
+    'assets/app.ico', 'assets/version-info.txt', 'assets/branding/*', 'assets/artwork/*',
+    'assets/ocr/manifest.json', 'assets/ocr/NOTICE.txt',
     'assets/ocr/licenses/*', 'assets/argos/manifest.json', 'assets/argos/*.txt',
-    'assets/gemini/*.txt', 'assets/gemini/*.md', 'assets/gemini/*.toml',
     'assets/fonts/*.txt', 'docs/*.md', 'docs/assets/*',
 )
 EXCLUDED = {'tools/diagnose_connection.py'}
@@ -65,7 +64,7 @@ def main():
                 raise RuntimeError('Broken documentation link: ' + str(source.relative_to(ROOT)) + ' -> ' + link)
             if destination.is_file() and destination.relative_to(ROOT).as_posix() not in selected:
                 raise RuntimeError('Documentation links to excluded file: ' + link)
-    manifest = ROOT / 'artifacts/publishing/manifest.json'
+    manifest = STAGE.parent / 'manifest.json'
     manifest.write_text(json.dumps(records, indent=2), encoding='utf-8')
     print(json.dumps(dict(files=len(records), bytes=sum(item['bytes'] for item in records),
         largest=max(records, key=lambda item: item['bytes']), stage=str(STAGE))))

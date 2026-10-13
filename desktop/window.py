@@ -6,9 +6,8 @@ import tempfile
 import time
 from PyQt6.QtCore import Qt, QThread, QTimer, QRect, QRectF, pyqtSignal, QLockFile, QPropertyAnimation, QEasingCurve
 from PyQt6.QtGui import QColor, QFont, QFontDatabase, QPainter, QPen, QIcon
-from PyQt6.QtWidgets import QApplication, QWidget, QMainWindow, QFileDialog, QTableWidgetItem, QMessageBox, QInputDialog, QLineEdit
+from PyQt6.QtWidgets import QApplication, QWidget, QMainWindow, QFileDialog, QTableWidgetItem, QMessageBox
 from .auth import ChatGPTAuth
-from .gemini import GeminiAuth
 from .local_translation import LocalTranslator
 from .storage import resource, data_dir, read_json, write_json
 from .translation import Translator, recognize, installed_ocr_languages
@@ -156,16 +155,17 @@ class Window(StudioUI, QMainWindow):
     phase_changed = pyqtSignal(str)
     def __init__(self):
         super().__init__()
-        self.setWindowTitle('RV TRANSLATION STUDIO — 2.9.3')
+        self.setWindowTitle('RV TRANSLATION STUDIO — 2.10.0')
         self.resize(1440, 960)
         self.setMinimumSize(980, 680)
         self.setWindowIcon(QIcon(str(resource('assets/app.ico'))))
         self.settings = read_json('settings.json', {})
         self.provider=self.settings.get('provider','openai')
-        if self.provider not in ('openai','gemini','argos'):self.provider='openai'
-        self.chatgpt_auth=ChatGPTAuth();self.gemini_auth=GeminiAuth()
+        if self.provider not in ('openai','argos'):self.provider='openai'
+        self.settings['provider']=self.provider
+        self.chatgpt_auth=ChatGPTAuth()
         self.local_auth=LocalTranslator()
-        self.auth={'openai':self.chatgpt_auth,'gemini':self.gemini_auth,'argos':self.local_auth}[self.provider]
+        self.auth={'openai':self.chatgpt_auth,'argos':self.local_auth}[self.provider]
         self.translator = Translator()
         self.jobs = set()
         self.busy = False
@@ -221,10 +221,10 @@ class Window(StudioUI, QMainWindow):
     @property
     def is_connected(self):
         if self.provider=='argos':return self.local_auth.connected
-        return self.gemini_auth.connected if self.provider=='gemini' else bool(self.auth.account and self.auth.account.get('access_token'))
+        return bool(self.auth.account and self.auth.account.get('access_token'))
 
     @property
-    def provider_label(self):return {'gemini':'Gemini','argos':'Argos Local','openai':'ChatGPT'}[self.provider]
+    def provider_label(self):return {'argos':'Argos Local','openai':'ChatGPT'}[self.provider]
 
     @property
     def local_route_error(self):
@@ -234,14 +234,14 @@ class Window(StudioUI, QMainWindow):
         return ''
 
     def switch_provider(self,provider):
-        if provider not in ('openai','gemini','argos'):raise ValueError('Choose ChatGPT, Gemini or Argos Local.')
+        if provider not in ('openai','argos'):raise ValueError('Choose ChatGPT or Argos Local.')
         if self.busy or self.auth_busy:return
         if provider==self.provider:return
         current=self.models.currentData()
         if current:self.settings['model_'+self.provider]=current
         if self.provider=='argos':self.local_auth.stop()
         self.clear_overlay();self.provider=provider;self.settings['provider']=provider
-        self.auth={'openai':self.chatgpt_auth,'gemini':self.gemini_auth,'argos':self.local_auth}[provider]
+        self.auth={'openai':self.chatgpt_auth,'argos':self.local_auth}[provider]
         self.provider_selector.blockSignals(True);self.provider_selector.setCurrentIndex(self.provider_selector.findData(provider));self.provider_selector.blockSignals(False)
         self.models.clear();self.models.addItem('Connect '+self.provider_label+' to load models','')
         self.refresh_accounts();self.save_settings()
@@ -252,20 +252,7 @@ class Window(StudioUI, QMainWindow):
         if self.provider=='argos':
             self.local_auth.validate_pair(source,target)
             return self.translator.translate(texts,None,model,source=source,target=target,provider='argos',complete=self.local_auth.complete_screen if screen else self.local_auth.complete,allow_partial=screen)
-        if self.provider=='gemini':
-            return self.translator.translate(texts,None,model,source=source,target=target,provider='gemini',complete=self.gemini_auth.complete)
         return self.translator.translate(texts,self.auth.access_token,model,source=source,target=target)
-
-    def switch_gemini_mode(self,mode):
-        if mode not in ('api','enterprise'):raise ValueError('Choose Gemini API key or organization sign-in.')
-        if self.busy or self.auth_busy:return
-        self.gemini_auth.cli.stop();self.settings['gemini_auth_mode']=mode;self.save_settings();self.gemini_auth.reload()
-        if hasattr(self,'gemini_mode_selector'):
-            self.gemini_mode_selector.blockSignals(True);self.gemini_mode_selector.setCurrentIndex(self.gemini_mode_selector.findData(mode));self.gemini_mode_selector.blockSignals(False)
-        if self.provider=='gemini':
-            self.clear_overlay();self.models.clear();self.models.addItem('Connect Gemini to load models','');self.refresh_accounts()
-            if self.is_connected:self.load_models()
-            else:self.status('Connect an API key from Google AI Studio' if mode=='api' else 'Organization sign-in requires Code Assist Standard/Enterprise. Personal CLI access has been retired.')
 
     def navigate(self, index):
         if hasattr(self, 'page_animation'):
@@ -323,7 +310,6 @@ class Window(StudioUI, QMainWindow):
         for w in (self.login_button, self.add_account, self.accounts, self.logout_button, self.refresh_button):
             w.setEnabled(not self.busy and not self.auth_busy)
         self.provider_selector.setEnabled(not self.busy and not self.auth_busy)
-        self.gemini_mode_selector.setEnabled(not self.busy and not self.auth_busy)
         for w in (self.screen, self.mode, self.models, self.smart_grouping, self.hide_capture, self.match_colors, self.region_button):
             w.setEnabled(not self.busy and not self.auth_busy)
         for w in (self.source_language,self.target_language,self.swap_languages,self.ocr_language):
@@ -344,13 +330,10 @@ class Window(StudioUI, QMainWindow):
         connected = self.is_connected
         self.connection.setText('●  Argos Local · Offline' if self.provider=='argos' and connected else '●  '+self.provider_label+' connected' if connected else '○  Not connected')
         self.account_text.setText(account['email'] if account else 'Not connected')
-        gemini_api=self.gemini_auth.mode=='api'
-        self.plan_text.setText(('Gemini API · Usage and billing belong to your Google AI Studio project.' if gemini_api else 'Organization access through the official Gemini CLI · Licensed accounts only.') if self.provider=='gemini' else 'ChatGPT plan usage enabled' if connected and 'chatgpt.tokens.use.direct' in account.get('scopes', []) else 'Sign in and authorize plan usage to begin.')
-        self.login_button.setText(('Replace API key' if connected else 'Connect API key') if self.provider=='gemini' and gemini_api else 'Continue with organization ↗' if self.provider=='gemini' else 'Continue with ChatGPT ↗')
-        self.logout_button.setText('Disconnect Studio' if self.provider=='gemini' else 'Sign out')
+        self.plan_text.setText('ChatGPT plan usage enabled' if connected and 'chatgpt.tokens.use.direct' in account.get('scopes', []) else 'Sign in and authorize plan usage to begin.')
+        self.login_button.setText('Continue with ChatGPT ↗')
+        self.logout_button.setText('Sign out')
         self.add_account.setVisible(self.provider=='openai')
-        self.gemini_mode_selector.setVisible(self.provider=='gemini')
-        self.gemini_mode_selector.setEnabled(not self.busy and not self.auth_busy)
         if self.provider=='argos':
             self.plan_text.setText(f'{len(self.local_auth.catalog["languages"])} built-in languages · CPU · No account, API key or credits')
         for widget in (self.login_button,self.logout_button,self.accounts,self.manage_usage_button):widget.setVisible(self.provider!='argos')
@@ -371,14 +354,10 @@ class Window(StudioUI, QMainWindow):
             return
         if self.provider=='argos':self.load_models();return
         existing = None if new else self.auth.account
-        api_key=None
-        if self.provider=='gemini' and self.gemini_auth.mode=='api':
-            api_key,accepted=QInputDialog.getText(self,'Connect Gemini API','Paste your Gemini API key from Google AI Studio.\nThe key is encrypted with Windows and never included in logs.',QLineEdit.EchoMode.Password)
-            if not accepted or not api_key.strip():return
         self.auth_busy = True
-        self.cancel_login.setVisible(api_key is None)
+        self.cancel_login.show()
         self.update_controls()
-        self.status('Verifying Gemini API key and text models…' if api_key is not None else 'Waiting for browser sign-in · Three-minute timeout')
+        self.status('Waiting for browser sign-in · Three-minute timeout')
         def done(account):
             self.refresh_accounts()
             self.status('Account verified · Loading available models')
@@ -388,7 +367,7 @@ class Window(StudioUI, QMainWindow):
             self.refresh_accounts()
             if self.is_connected:
                 self.load_models()
-        self.run_job((lambda:self.gemini_auth.connect_api_key(api_key)) if api_key is not None else (lambda: self.auth.sign_in(existing)), done, finish)
+        self.run_job(lambda: self.auth.sign_in(existing), done, finish)
 
     def load_models(self):
         if self.auth_busy or self.busy:
@@ -406,9 +385,6 @@ class Window(StudioUI, QMainWindow):
             preferred = self.models.findData(preferred_model)
             if preferred >= 0:
                 self.models.setCurrentIndex(preferred)
-            elif self.provider=='gemini' and self.gemini_auth.mode=='api':
-                for i,(slug,name) in enumerate(models):
-                    if 'flash' in slug and 'preview' not in slug:self.models.setCurrentIndex(i);break
             self.status('Ready · Open your game and press F1' if models else 'No models are available for this account')
         def finish():
             self.auth_busy = False
@@ -430,7 +406,7 @@ class Window(StudioUI, QMainWindow):
         def done(revoked):
             self.models.clear()
             self.models.addItem('Connect '+self.provider_label+' to load models', '')
-            self.status(('API key removed from Studio. Manage or revoke the key in Google AI Studio.' if self.gemini_auth.mode=='api' else 'Disconnected from Studio. Organization credentials remain managed by Gemini CLI; use Manage Google access to revoke.') if self.provider=='gemini' else 'Signed out' if revoked else 'Signed out locally. Online revocation could not be confirmed; disconnect in ChatGPT Settings.')
+            self.status('Signed out' if revoked else 'Signed out locally. Online revocation could not be confirmed; disconnect in ChatGPT Settings.')
         def finish():
             self.auth_busy = False
             self.refresh_accounts()
@@ -769,7 +745,6 @@ class Window(StudioUI, QMainWindow):
         for ident in self.hotkey_ids:
             USER32.UnregisterHotKey(int(self.winId()), ident)
         self.overlay.close()
-        self.gemini_auth.cli.stop()
         self.local_auth.stop()
         event.accept()
 

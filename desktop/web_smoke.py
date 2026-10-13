@@ -15,7 +15,7 @@ def start_smoke(window,target):
 
     def finish():
         result['javascript_errors']=view.dashboard_page.errors
-        result['ok']=all(result.get(key) for key in ('web_loaded','daisyui_theme','ocr','rapid_ocr','rapid_multilingual','language_controls','gemini_acp','text_scale','thai_wrapping','argos_offline','argos_auto_detect','argos_complete_paragraph','argos_bilingual','argos_fullscreen_safe','english_original_font')) and not result['javascript_errors']
+        result['ok']=all(result.get(key) for key in ('web_loaded','daisyui_theme','ocr','rapid_ocr','rapid_multilingual','language_controls','brand_assets','two_providers','text_scale','thai_wrapping','argos_offline','argos_auto_detect','argos_complete_paragraph','argos_bilingual','argos_fullscreen_safe','english_original_font')) and not result['javascript_errors']
         (target/'smoke-result.json').write_text(json.dumps(result,indent=2),encoding='utf-8')
         window.close()
 
@@ -73,13 +73,6 @@ def start_smoke(window,target):
                 finally:local.stop()
                 for value in (12,20,36):
                     rendered=QImage(900,180,QImage.Format.Format_RGB32);rendered.fill(QColor('#202d2b'));p=QPainter(rendered);paint_translation(p,item,value);p.end();rendered.save(str(target/f'scale-{value}.png'))
-            from .gemini import GeminiCLI
-            cli=GeminiCLI()
-            try:
-                handshake=cli.start();result['gemini_acp']=any(m['id']=='oauth-personal' for m in handshake.get('authMethods',[]))
-                result['gemini_transport_scope']='Licensed organization CLI only; personal accounts use Gemini API'
-                result['gemini_cli_version']=handshake.get('agentInfo',{}).get('version')
-            finally:cli.stop()
             window.set_advanced_values({'ocr_backend':'rapid'});window.navigate(3);view.bridge.sync(True)
             QTimer.singleShot(100,lambda:window.grab().save(str(target/'rapid-ocr-settings.png')))
             window.target_language.select_language('ja')
@@ -116,6 +109,11 @@ def start_smoke(window,target):
             if attempts>50: result['error']='Dashboard did not initialize';finish()
             else:QTimer.singleShot(200,poll)
     def theme(value):
-        result['daisyui_theme']=bool(value);capture_page()
+        result['daisyui_theme']=bool(value)
+        view.page().runJavaScript("({brand:[...document.querySelectorAll('.brand-mark,.scene-art')].every(n=>n.tagName==='IMG'&&n.complete&&n.naturalWidth>1000),providers:[...document.getElementById('provider').options].map(n=>n.value).join(',')})",brand)
+    def brand(value):
+        result['brand_assets']=bool(value and value.get('brand'))
+        result['two_providers']=bool(value and value.get('providers')=='openai,argos')
+        capture_page()
     def poll():view.page().runJavaScript("document.documentElement.dataset.ready==='true'",ready)
     QTimer.singleShot(300,poll)

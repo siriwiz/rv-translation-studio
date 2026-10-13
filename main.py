@@ -1,4 +1,4 @@
-"""RV TRANSLATION STUDIO desktop entry point. Original: main.legacy.py."""
+"""RV TRANSLATION STUDIO 2.10.0 desktop entry point."""
 import sys
 from pathlib import Path
 if not getattr(sys, 'frozen', False):

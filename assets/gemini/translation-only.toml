@@ -1,4 +1,0 @@
-[[rule]]
-toolName = "*"
-decision = "deny"
-priority = 999

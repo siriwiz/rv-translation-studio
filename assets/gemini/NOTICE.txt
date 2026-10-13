@@ -1,1 +1,0 @@
-RV TRANSLATION STUDIO includes the unmodified official Google Gemini CLI 0.63.0 (Copyright Google LLC, Apache License 2.0) and Node.js 22.12.0 (Copyright Node.js contributors, MIT and included third-party licenses). Gemini CLI license is in runtime/cli/LICENSE. Node license is in Node-LICENSE.txt. Google sign-in and credential storage remain managed by the official CLI.

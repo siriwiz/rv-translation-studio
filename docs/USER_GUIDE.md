@@ -4,7 +4,7 @@ RV Translation Studio translates a captured screen and places the result over th
 
 ## Set up a workspace
 
-1. Open **Connection** and select a translation provider. **Argos Local** works without an account once the bundled models are present. For ChatGPT, sign in through the browser and select a model returned by your account. For Gemini, choose API key mode and enter your key in the native masked dialog.
+1. Open **Connection** and select a translation provider. **Argos Local** works without an account once the bundled models are present. For ChatGPT, sign in through the browser and select a model returned by your account.
 2. In **Studio**, choose the source and target languages. Start with an explicit source language when testing a new game.
 3. Open **Settings → Capture** and choose the OCR engine and reading profile. The OCR profile must be able to read the source script.
 4. Choose a display and capture area in Studio. Return to your game and release **F1**.
@@ -33,7 +33,7 @@ RapidOCR offers eleven reading profiles: English; Chinese/Japanese/English; Kore
 
 **Follow source** selects a matching profile for an explicit source language. With **Auto** source, it defaults to Chinese/Japanese/English. Select a reading profile manually for other scripts. Text language detection happens after OCR; it cannot recover characters the chosen OCR model did not recognize.
 
-Auto detection is useful for mixed English/Japanese dialogue. Short labels and names can be ambiguous. Choose an explicit source when detection is unreliable. Version 2.9.3 source detects local translation languages per passage and preserves unresolved fullscreen passages rather than discarding the entire successful result.
+Auto detection is useful for mixed English/Japanese dialogue. Short labels and names can be ambiguous. Choose an explicit source when detection is unreliable. Version 2.10.0 detects local translation languages per passage and preserves unresolved fullscreen passages rather than discarding the entire successful result.
 
 ## Make the overlay fit
 
@@ -59,9 +59,8 @@ Settings cover capture delay and size limit, passage limit, OCR profile, provide
 | OCR misses a script | Select a matching RapidOCR reading profile, or install the corresponding Windows OCR language. Increase capture size if small text is downscaled too far. |
 | Translation is slow | Inspect Performance Lab. Reduce the capture area; enable cache; try Argos Fast for local latency or a faster model available to your cloud account. |
 | Argos omits part of a sentence | Use shorter dialogue selections or compare with a cloud provider. Fast/Balanced/Quality change decoding effort and do not guarantee complete translation. |
-| Local incomplete-text message | Retry a smaller region or an explicit source. The 2.9.3 source has partial fullscreen recovery; the earlier 2.9.2 binary may still reject the full result. |
+| Local incomplete-text message | Retry a smaller region or an explicit source. Version 2.10.0 includes partial fullscreen recovery; older binaries may reject the full result. |
 | ChatGPT login succeeds but inference fails | Reload account models and check model access, workspace restrictions, and account quotas. Login alone does not guarantee inference access. |
-| Gemini personal-account CLI is unsupported | Use Gemini API key mode. Legacy CLI organization access depends on the account's entitlement. |
 | Overlay blocks a new scene | Press F2, then capture again. |
 
 For an issue report, include the source version, provider/model, OCR profile, capture mode, sanitized error, and Performance Lab timings. Remove keys, tokens, account details, and private screen content.

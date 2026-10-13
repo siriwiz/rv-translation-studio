@@ -9,7 +9,6 @@ The application stores its data in `%LOCALAPPDATA%\RueValleyTranslator` by defau
 | Data | Storage |
 | --- | --- |
 | ChatGPT account tokens | Windows DPAPI-encrypted account storage |
-| Gemini API key | Separate Windows DPAPI-encrypted storage |
 | Translation history, cache, settings | Local JSON files; not encrypted |
 | OCR input screenshots | Processed locally; temporary capture files are removed after use |
 
@@ -17,9 +16,9 @@ DPAPI protects stored credentials for the Windows account. It does not make a co
 
 ## What cloud translation receives
 
-ChatGPT and Gemini receive recognized text and translation instructions when selected. The translation requests do not upload the screenshot image. A full-screen capture can recognize private or unrelated text, so choose a smaller region when appropriate. Cloud processing follows the selected provider's applicable account and API terms.
+ChatGPT receives recognized text and translation instructions when selected. The translation requests do not upload the screenshot image. A full-screen capture can recognize private or unrelated text, so choose a smaller region when appropriate. Cloud processing follows the selected provider's applicable account and API terms.
 
-Browser-based authentication opens the provider's sign-in flow. Provider access and quotas are checked separately from a successful sign-in. Gemini API usage is separate from a Google AI Pro or Ultra subscription.
+Browser-based authentication opens the provider's sign-in flow. Provider access and quotas are checked separately from a successful sign-in.
 
 ## Repository hygiene
 

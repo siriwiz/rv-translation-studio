@@ -2,9 +2,10 @@
 import math
 import time
 from PyQt6.QtCore import Qt, QTimer, QVariantAnimation, QEasingCurve, QRectF, QPointF
-from PyQt6.QtGui import QColor, QPainter, QPen, QFont, QPainterPath, QLinearGradient, QPolygonF
+from PyQt6.QtGui import QColor, QPainter, QPen, QFont, QPainterPath, QLinearGradient, QPolygonF, QImage
 from PyQt6.QtWidgets import QWidget, QCheckBox, QLabel, QPlainTextEdit, QComboBox, QCompleter
 from .languages import language_catalog, language_name, resolve_language
+from .storage import resource
 
 
 class LanguagePicker(QComboBox):
@@ -171,6 +172,7 @@ class PreviewCanvas(QWidget):
         self.motion_enabled = True
         self.phase = 'idle'
         self.before = self.after = None
+        self.artwork = QImage(str(resource('assets/artwork/valley-station.png')))
         self.text_scale = 20
         self.start = time.monotonic()
         self.timer = QTimer(self)
@@ -219,61 +221,17 @@ class PreviewCanvas(QWidget):
             p.drawImage(QRectF((self.width()-size.width())/2, (self.height()-size.height())/2,
                               size.width(), size.height()), image)
         else:
-            # Original vector scene, never presented as a live game capture.
+            # Generated illustration, never presented as a live game capture.
             p.save()
             scale=max(self.width()/800,self.height()/390)
             p.translate((self.width()-800*scale)/2,(self.height()-390*scale)/2)
             p.scale(scale,scale)
-            sky = QLinearGradient(0, 0, 0, 390)
-            sky.setColorAt(0, QColor('#151515'))
-            sky.setColorAt(1, QColor('#3b3b3b'))
-            p.fillRect(0, 0, 800, 390, sky)
-            p.setPen(Qt.PenStyle.NoPen)
-            p.setBrush(QColor('#707070'))
-            p.drawEllipse(QRectF(560, 44, 28, 28))
-            for points, color in [([(0, 180),(90,95),(180,135),(300,70),(460,155),(560,100),(700,150),(800,95),(800,390),(0,390)], '#232323'),
-                                  ([(0,225),(95,175),(220,204),(350,145),(510,210),(650,165),(800,230),(800,390),(0,390)], '#303030')]:
-                p.setBrush(QColor(color))
-                p.drawPolygon(QPolygonF([QPointF(x, y) for x,y in points]))
-            p.setBrush(QColor('#393939'))
-            p.drawPolygon(QPolygonF([QPointF(390,215),QPointF(430,215),QPointF(635,390),QPointF(160,390)]))
-            p.setPen(QPen(QColor('#565656'), 1))
-            p.drawLine(390,215,160,390)
-            p.drawLine(430,215,635,390)
-            for i in range(8):
-                y = 226 + i*i*2.5
-                p.drawLine(QPointF(408, y), QPointF(405, y+3+i*1.4))
-            for x,y,s in [(130,217,1.25),(215,210,.8),(535,220,1.1),(615,202,.7)]:
-                p.setPen(QPen(QColor('#505050'), 1))
-                p.setBrush(QColor('#1d1d1d'))
-                p.drawRect(QRectF(x,y-40*s,64*s,40*s))
-                p.setBrush(QColor('#111111'))
-                p.drawPolygon(QPolygonF([QPointF(x-6*s,y-40*s),QPointF(x+32*s,y-66*s),QPointF(x+70*s,y-40*s)]))
-                p.setBrush(QColor('#767676'))
-                for wx in (12,42):
-                    p.drawRect(QRectF(x+wx*s,y-28*s,9*s,11*s))
-                p.setBrush(QColor('#101010'))
-                p.drawRect(QRectF(x+27*s,y-20*s,12*s,20*s))
-            for x,s in [(58,1.5),(740,1.25),(290,.6),(493,.55)]:
-                y=242
-                p.setPen(QPen(QColor('#111111'), 3*s))
-                p.drawLine(QPointF(x,y),QPointF(x+4,y-130*s))
-                for j in range(5):
-                    by=y-(j*17+30)*s
-                    p.drawLine(QPointF(x+2,by),QPointF(x-22*s,by-22*s))
-                    p.drawLine(QPointF(x+2,by-8*s),QPointF(x+26*s,by-29*s))
-            p.setPen(QPen(QColor('#656565'), .6))
-            for i in range(14):
-                x = (i*79+t*7) % 850-25
-                y = 70+(i*47)%160
-                p.drawLine(QPointF(x,y),QPointF(x+60,y))
+            if not self.artwork.isNull():
+                size=self.artwork.size().scaled(800,390,Qt.AspectRatioMode.KeepAspectRatioByExpanding)
+                p.drawImage(QRectF((800-size.width())/2,(390-size.height())/2,size.width(),size.height()),self.artwork)
             shade=QLinearGradient(0,240,0,390)
-            shade.setColorAt(0,QColor(0,0,0,0)); shade.setColorAt(1,QColor(0,0,0,240))
+            shade.setColorAt(0,QColor(0,0,0,0));shade.setColorAt(1,QColor(0,0,0,220))
             p.fillRect(0,230,800,160,shade)
-            p.setPen(QPen(QColor('#b4b4b4'), 1))
-            for x,sgn in [(78,1),(722,-1)]:
-                p.drawLine(x,278,x+sgn*18,278); p.drawLine(x,278,x,292)
-                p.drawLine(x,349,x+sgn*18,349); p.drawLine(x,349,x,335)
             from .languages import overlay_font
             target=getattr(self,'target_language','th')
             p.setFont(QFont(overlay_font(target) if self.translated else 'Georgia',
@@ -288,7 +246,7 @@ class PreviewCanvas(QWidget):
             p.drawText(QRectF(90,285,620,56), Qt.AlignmentFlag.AlignCenter, caption)
             p.setFont(QFont('Consolas', 8))
             p.setPen(QColor('#a0a0a0'))
-            p.drawText(24,30,'R/V  —  OVERLAY STUDY / 001')
+            p.drawText(24,30,'RV  —  OVERLAY STUDY')
             p.drawText(24,370,'ILLUSTRATIVE SCENE  ·  '+getattr(self,'language_pair','EN → TH'))
             p.restore()
         # Real work is indicated by phase, never a fabricated completion percentage.

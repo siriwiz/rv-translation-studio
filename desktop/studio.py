@@ -1,5 +1,6 @@
 """Monochrome studio shell. Application behavior remains in Window."""
 from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QPixmap
 from PyQt6.QtWidgets import (QApplication, QWidget, QFrame, QLabel, QVBoxLayout, QHBoxLayout,
     QComboBox, QStackedWidget, QSlider, QPlainTextEdit, QTableWidget, QHeaderView,
     QAbstractItemView, QScrollArea, QGraphicsOpacityEffect, QProgressBar, QLineEdit, QDialog, QSpinBox)
@@ -7,6 +8,7 @@ from .motion import MotionButton
 from .studio_widgets import Switch, PreviewCanvas, Pipeline, Readout, StatusLabel, ConnectionBadge, LanguagePicker
 from .languages import language_name, language_badge, overlay_font
 from .ocr_profiles import resolve_ocr_language, profiles_for
+from .storage import resource
 import webbrowser
 
 STYLE = '''
@@ -115,7 +117,10 @@ class StudioUI:
         nav=QVBoxLayout(sidebar)
         nav.setContentsMargins(18,26,18,20)
         nav.setSpacing(8)
-        nav.addWidget(text('R/V', 'brand'))
+        brand=QLabel()
+        brand.setPixmap(QPixmap(str(resource('assets/branding/rv-white-on-black.png'))).scaled(58,58,Qt.AspectRatioMode.KeepAspectRatio,Qt.TransformationMode.SmoothTransformation))
+        brand.setAccessibleName('RV Translation Studio logo')
+        nav.addWidget(brand)
         nav.addWidget(text('RV TRANSLATION\nSTUDIO','eyebrow'))
         nav.addSpacing(32)
         nav.addWidget(text('WORKSPACE','eyebrow'))
@@ -407,14 +412,10 @@ class StudioUI:
         row=QHBoxLayout(); row.setSpacing(18)
         connection,p=panel(margins=18)
         p.setSpacing(10)
-        self.provider_selector=QComboBox();self.provider_selector.addItem('ChatGPT','openai');self.provider_selector.addItem('Gemini / Google','gemini');self.provider_selector.addItem('Argos Local (Offline)','argos')
+        self.provider_selector=QComboBox();self.provider_selector.addItem('ChatGPT','openai');self.provider_selector.addItem('Argos Local (Offline)','argos')
         self.provider_selector.setCurrentIndex(self.provider_selector.findData(self.provider))
         self.provider_selector.currentIndexChanged.connect(lambda:self.switch_provider(self.provider_selector.currentData()))
         p.addWidget(self.provider_selector)
-        self.gemini_mode_selector=QComboBox();self.gemini_mode_selector.addItem('Gemini API key','api');self.gemini_mode_selector.addItem('Organization sign-in','enterprise')
-        self.gemini_mode_selector.setCurrentIndex(self.gemini_mode_selector.findData(self.gemini_auth.mode))
-        self.gemini_mode_selector.currentIndexChanged.connect(lambda:self.switch_gemini_mode(self.gemini_mode_selector.currentData()))
-        p.addWidget(self.gemini_mode_selector)
         p.addWidget(text('CHATGPT ACCOUNT','eyebrow'))
         self.account_text=text('Not connected','section'); p.addWidget(self.account_text)
         self.plan_text=text('Sign in and authorize plan usage to begin.','muted'); p.addWidget(self.plan_text)
@@ -788,7 +789,4 @@ class StudioUI:
 
     def manage_usage(self):
         if self.provider=='argos':self.status('Argos Local runs offline and has no API charges.');return
-        webbrowser.open(('https://aistudio.google.com/usage' if self.gemini_auth.mode=='api' else 'https://myaccount.google.com/connections') if self.provider=='gemini' else 'https://chatgpt.com/settings/usage')
-
-    def create_gemini_key(self):
-        webbrowser.open('https://aistudio.google.com/apikey')
+        webbrowser.open('https://chatgpt.com/settings/usage')

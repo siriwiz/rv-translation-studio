@@ -3,7 +3,7 @@
 .env.*
 !.env.example
 accounts.dat
-gemini*.dat
+*.dat
 history.json
 settings.json
 host.json
@@ -33,7 +33,6 @@ tmp*/
 assets/ocr/*.onnx
 assets/ocr/*.download
 assets/argos/models/
-assets/gemini/runtime/
 tools/argos/*.argosmodel
 tools/argos/*.download
 tools/antigravity/

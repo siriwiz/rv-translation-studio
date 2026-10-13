@@ -1,4 +1,6 @@
-<p align="center"><img src="docs/assets/hero.svg" alt="RV Translation Studio — Stay inside the story" width="100%"></p>
+<p align="center"><img src="assets/branding/rv-white-on-black.png" alt="RV white on black logo" width="100"> <img src="assets/branding/rv-black-on-white.png" alt="RV black on white logo" width="100"></p>
+<h1 align="center">RV TRANSLATION STUDIO</h1>
+<p align="center"><strong>Stay inside the story.</strong></p>
 
 <p align="center"><strong>A Windows workspace for translating the screen without leaving the game.</strong><br>Local OCR · Offline or cloud translation · Blended overlays · One-key capture</p>
 
@@ -6,7 +8,7 @@
 <img src="https://img.shields.io/badge/platform-Windows_10_%2F_11-111111?style=flat-square" alt="Windows 10 and 11">
 <img src="https://img.shields.io/badge/desktop-PyQt6-111111?style=flat-square" alt="PyQt6 desktop">
 <img src="https://img.shields.io/badge/UI-daisyUI_5-111111?style=flat-square" alt="daisyUI 5">
-<img src="https://img.shields.io/badge/source-2.9.3_preview-eeeeea?style=flat-square&labelColor=111111" alt="Source 2.9.3 preview">
+<img src="https://img.shields.io/badge/version-2.10.0-eeeeea?style=flat-square&labelColor=111111" alt="Version 2.10.0">
 </p>
 
 <p align="center"><a href="#start-translating">Quick start</a> · <a href="#choose-your-engine">Engines</a> · <a href="docs/USER_GUIDE.md">User guide</a> · <a href="docs/BUILD.md">Build from source</a> · <a href="docs/BENCHMARKS.md">Benchmarks</a></p>
@@ -21,7 +23,7 @@ RV Translation Studio captures dialogue, reads it locally, translates it, and pa
 
 Choose a fully local setup with RapidOCR and Argos, or connect a supported cloud provider when you want a different translation model. The monochrome workspace brings capture, comparison, history, connection, and advanced settings into one desktop app.
 
-> **Project status:** this repository contains the **2.9.3 source preview**. The measured benchmark uses the **2.9.2 baseline**. No downloadable `.exe` release has been published here yet. Large model files are prepared separately when building from source.
+> **Project status:** the current version is **2.10.0**, with generated RV branding, a new monochrome preview illustration, and two translation providers: ChatGPT and Argos Local. The measured benchmark uses the **2.9.2 baseline**. No downloadable `.exe` release has been published here yet. Large model files are prepared separately when building from source.
 
 ## What you can do
 
@@ -31,7 +33,7 @@ Choose a fully local setup with RapidOCR and Argos, or connect a supported cloud
 | Pick exactly what to read | Full display, subtitle zone, or F1 → drag a custom region → translate |
 | Read locally | Windows native OCR, bundled RapidOCR, or PowerShell compatibility backend |
 | Translate offline | Ten Argos languages, direct English routes, and English-pivot routes |
-| Connect cloud models | ChatGPT account sign-in or Gemini API key; model access depends on the account |
+| Connect cloud models | ChatGPT account sign-in; model access depends on the account |
 | Keep dialogue together | OCR line grouping, offline sentence splitting, and local source detection |
 | Blend into the scene | Source-color sampling, background inpainting, and adjustable text scale |
 | Review and reuse | Original/translated preview, searchable Library, copy, and JSON export |
@@ -41,7 +43,7 @@ Choose a fully local setup with RapidOCR and Argos, or connect a supported cloud
 ## Start translating
 
 1. Launch the prepared Windows application, or follow the [source setup](docs/BUILD.md).
-2. In **Connection**, choose **Argos Local**, sign in to **ChatGPT**, or configure a **Gemini API key**.
+2. In **Connection**, choose **Argos Local** or sign in to **ChatGPT**.
 3. In **Studio**, select source/target languages, display, capture area, and model. Choose a matching OCR reading profile in Settings.
 4. Return to the game and release **F1**. In Custom area mode, drag around the text; releasing the mouse starts translation.
 5. Read the overlay, then press **F2** before the scene changes.
@@ -62,9 +64,8 @@ Windowed or borderless games are the best starting point. Exclusive fullscreen, 
 | --- | --- | --- | --- |
 | **Argos Local** | None; bundled models | Offline operation and low translation latency | Ten languages; long or complex sentences can lose clauses |
 | **ChatGPT** | Browser sign-in using OAuth/PKCE | Model choice and contextual dialogue translation | Eligible account/model access, network, and account quotas |
-| **Gemini** | API key in a masked native dialog | Google's available API models | API quota/billing is separate from Google AI Pro/Ultra |
 
-The retained Gemini CLI option is intended for eligible organization Code Assist access. Personal-account CLI access has returned an unsupported-client response; use API key mode for personal Gemini usage. Signing in does not itself guarantee translation entitlement.
+Signing in to ChatGPT does not itself guarantee translation entitlement.
 
 **Argos languages:** English, Thai, Chinese (Simplified), Japanese, Korean, French, German, Spanish, Vietnamese, and Russian. Eighteen model directions connect English to the other nine languages; non-English pairs use an English pivot, giving 90 directed pairs between distinct supported languages.
 
@@ -121,10 +122,10 @@ The [Windows build guide](docs/BUILD.md) covers dependencies, pinned model downl
 ```powershell
 python main.py
 python -m unittest discover -s tests -q
-.\build.ps1 -AppName RVTranslationStudio-2.9.3
+.\build.ps1 -AppName RVTranslationStudio-2.10.0
 ```
 
-The all-model single-file build is approximately 2.6 GB and takes time to extract on a cold launch. Executables, downloaded models, dependency installations, and generated UI assets are kept out of Git.
+The all-model single-file build is approximately 2.5 GB and takes time to extract on a cold launch. Executables, downloaded models, dependency installations, and generated UI assets are kept out of Git.
 
 ## Privacy and practical limits
 
@@ -142,9 +143,11 @@ See [privacy](docs/PRIVACY.md) and [troubleshooting](docs/USER_GUIDE.md#troubles
 - [Run and build on Windows](docs/BUILD.md)
 - [Benchmark results](docs/BENCHMARKS.md)
 - [Privacy and local storage](docs/PRIVACY.md)
+- [RV logo exports](assets/branding/README.md)
+- [Default artwork](assets/artwork/README.md)
 - [Source release notes](CHANGELOG.md)
 - [Third-party notices](THIRD_PARTY_NOTICES.md)
 
-Built with PyQt6/Qt WebEngine, daisyUI, RapidOCR, ONNX Runtime, Windows OCR, Argos Translate, CTranslate2, Lingua, pySBD, and PyThaiNLP. Fonts: Playpen Sans Thai and Sarabun. This is an independent application, not an official OpenAI, Google, or game-publisher product.
+Built with PyQt6/Qt WebEngine, daisyUI, RapidOCR, ONNX Runtime, Windows OCR, Argos Translate, CTranslate2, Lingua, pySBD, and PyThaiNLP. Fonts: Playpen Sans Thai and Sarabun. This is an independent application, not an official OpenAI or game-publisher product.
 
 No project-wide open-source license has been selected. Third-party components retain their own licenses and attribution requirements; their inclusion does not assign a license to the application source.

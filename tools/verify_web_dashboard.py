@@ -8,13 +8,14 @@ import tempfile
 os.environ['RUEVALLEY_DATA_DIR']=tempfile.mkdtemp(prefix='test-data-',dir=target)
 from desktop.web_dashboard import install_dashboard
 from desktop.window import Window,STYLE
-from desktop.storage import read_json
+from desktop.storage import read_json,write_json
 from PyQt6.QtCore import Qt,QTimer
-from PyQt6.QtWidgets import QApplication,QInputDialog,QLineEdit
+from PyQt6.QtWidgets import QApplication
 from PyQt6.QtGui import QFontDatabase
 from PyQt6.QtTest import QTest
 app=QApplication(['RVStudio-acceptance']);app.setStyle('Fusion');app.setStyleSheet(STYLE)
 for font in ('Sarabun-Regular.ttf','PlaypenSansThai-Light.ttf'):QFontDatabase.addApplicationFont(str(root/font))
+write_json('settings.json',{'provider':'retired-provider'})
 window=Window();window.setMinimumSize(420,600)
 window.match_colors.setChecked(True);window.motion_toggle.setChecked(True);window.font_slider.setValue(20)
 window.source_language.select_language('en');window.target_language.select_language('th')
@@ -41,6 +42,13 @@ def check(name,value):
     checks[name]=bool(value);assert value,name
 
 try:
+    check('retired_provider_recovers_to_chatgpt',window.provider=='openai' and window.settings['provider']=='openai')
+    try:
+        window.switch_provider('retired-provider')
+    except ValueError:
+        check('unsupported_provider_rejected',True)
+    else:
+        check('unsupported_provider_rejected',False)
     until(lambda:js("document.documentElement.dataset.ready")=='true')
     check('embedded_bridge_ready',window.web_dashboard.loaded)
     check('real_daisyui_theme',js("getComputedStyle(document.documentElement).getPropertyValue('--radius-box').trim()")=='.65rem')
@@ -162,37 +170,12 @@ try:
     check('unsupported_rapid_language_is_explicit',not window.web_dashboard.bridge.snapshot()['ocr_ready'])
     window.source_language.select_language('en');window.set_advanced_values({'ocr_backend':'native'})
     window.chatgpt_auth.models=lambda:[('fixture-1','Fixture One'),('fixture-2','Fixture Two')]
-    window.switch_gemini_mode('api')
-    window.gemini_auth.models=lambda:[('gemini-fixture','Gemini fixture model')]
-    js("document.querySelector('[data-page=connection]').click();document.getElementById('provider').value='gemini';document.getElementById('provider').dispatchEvent(new Event('change',{bubbles:true}))")
-    until(lambda:window.provider=='gemini');QTest.qWait(150)
-    check('gemini_provider_selector',js("document.getElementById('login').textContent==='Connect API key'"))
-    check('gemini_api_no_project_required',js("getComputedStyle(document.getElementById('gemini-project-field')).display==='none'"))
-    check('gemini_migration_explanation',js("document.getElementById('provider-help').textContent.includes('retired')"))
-    check('gemini_api_key_link',js("getComputedStyle(document.getElementById('create-gemini-key')).display!=='none'"))
-    window.grab().save(str(target/'gemini-api-connection.png'))
-    def dismiss_key_prompt():
-        dialog=QApplication.activeModalWidget()
-        check('gemini_key_prompt_is_native_and_masked',isinstance(dialog,QInputDialog) and dialog.findChild(QLineEdit).echoMode()==QLineEdit.EchoMode.Password)
-        dialog.reject()
-    QTimer.singleShot(100,dismiss_key_prompt);window.login()
-    check('gemini_key_cancel_does_not_connect',not window.gemini_auth.connected and not window.auth_busy)
-    js("document.getElementById('gemini-auth-mode').value='enterprise';document.getElementById('gemini-auth-mode').dispatchEvent(new Event('change',{bubbles:true}))")
-    until(lambda:window.settings.get('gemini_auth_mode')=='enterprise');QTest.qWait(100)
-    check('gemini_organization_login',js("document.getElementById('login').textContent==='Continue with organization ↗'"))
+    check('only_supported_providers',js("[...document.getElementById('provider').options].map(n=>n.value).join(',')==='openai,argos'"))
+    check('generated_artwork_loaded',js("document.querySelector('.scene-art').tagName==='IMG' && document.querySelector('.scene-art').complete && document.querySelector('.scene-art').naturalWidth>1000"))
+    check('generated_logo_loaded',js("document.querySelector('.brand-mark').tagName==='IMG' && document.querySelector('.brand-mark').complete && document.querySelector('.brand-mark').naturalWidth>1000"))
     check('chatgpt_account_preserved',window.chatgpt_auth.account['email']=='fixture@example.invalid')
-    check('gemini_project_control',js("getComputedStyle(document.getElementById('gemini-project-field')).display!=='none'"))
-    window.gemini_auth.credentials={'active':'gemini-google','accounts':[dict(client_id='gemini-google',email='google-fixture@example.invalid')]}
-    window.load_models();until(lambda:not window.auth_busy and window.models.currentData()=='gemini-fixture')
     from desktop.translation import Translator
     window.translator.translate=Translator.translate.__get__(window.translator)
-    window.gemini_auth.complete=lambda *a,**k:['Bonjour depuis Gemini.']
-    window.target_language.select_language('fr');window.refresh_accounts();window.web_dashboard.bridge.sync(True);QTest.qWait(150)
-    check('gemini_connected_label',js("document.getElementById('connection-label').textContent==='Gemini connected'"))
-    js("document.getElementById('sample-input').value='A new Gemini provider fixture.';document.getElementById('translate-sample').click()")
-    until(lambda:not window.jobs and window.test_output.text()=='Bonjour depuis Gemini.')
-    check('gemini_translation_routing',True)
-    QTest.qWait(450);window.grab().save(str(target/'gemini-connection.png'))
     js("document.getElementById('font-size').value='36';document.getElementById('font-size').dispatchEvent(new Event('input',{bubbles:true}))")
     until(lambda:window.overlay.font_size==36);check('live_scale_input_bridge',True)
     window.switch_provider('argos');until(lambda:not window.auth_busy and str(window.models.currentData()).startswith('argos-'))
