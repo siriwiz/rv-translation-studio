@@ -58,7 +58,7 @@ Requires **Windows 10/11 x64**. Allow at least 5.2 GB of free space for the down
 
 ## Translation samples
 
-Two captured scenes, nine translated overlays. **`default.png` and `default2.png` are the original game captures.** Every screenshot from the `sample` folder is included below, with the source shown first. Click an image to inspect the full-resolution capture.
+Two captured scenes, eight translated overlays. **`default.png` and `default2.png` are the original game captures.** The source is shown first in each group. Click an image to inspect the full-resolution capture.
 
 ### Japanese dialogue
 
@@ -89,11 +89,8 @@ Two captured scenes, nine translated overlays. **`default.png` and `default2.png
 <td width="50%"><strong>Thai · English → Thai</strong><br><br><a href="sample/Screenshot (1863).png"><img src="sample/Screenshot (1863).png" alt="Thai translation overlay on the English source scene" width="100%"></a></td>
 </tr>
 <tr>
-<td width="50%"><strong>Korean · English → Korean</strong><br><br><a href="sample/Screenshot (1864).png"><img src="sample/Screenshot (1864).png" alt="Korean translation overlay on the English source scene" width="100%"></a></td>
 <td width="50%"><strong>Chinese (Simplified) · English → Chinese</strong><br><br><a href="sample/Screenshot (1865).png"><img src="sample/Screenshot (1865).png" alt="Simplified Chinese translation overlay on the English source scene" width="100%"></a></td>
-</tr>
-<tr>
-<td colspan="2"><strong>Russian · English → Russian</strong><br><br><a href="sample/Screenshot (1866).png"><img src="sample/Screenshot (1866).png" alt="Russian translation overlay on the English source scene" width="100%"></a></td>
+<td width="50%"><strong>Russian · English → Russian</strong><br><br><a href="sample/Screenshot (1866).png"><img src="sample/Screenshot (1866).png" alt="Russian translation overlay on the English source scene" width="100%"></a></td>
 </tr>
 </table>
 
